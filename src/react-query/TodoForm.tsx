@@ -13,6 +13,7 @@ const TodoForm = () => {
       axios
         .post<Todo>("https://jsonplaceholder.typicode.com/todos", todo)
         .then((res) => res.data),
+
     onSuccess: (savedTodo, newTodo) => {
       /* Approach 1: Invalidating the cache NB: Doesn't work with JSON placeholder
        */
@@ -25,6 +26,8 @@ const TodoForm = () => {
         savedTodo,
         ...(todos || []),
       ]);
+
+      if (ref.current) ref.current.value = "";
     },
   });
 
@@ -52,7 +55,9 @@ const TodoForm = () => {
           <input ref={ref} type="text" className="form-control" />
         </div>
         <div className="col">
-          <button className="btn btn-primary">Add</button>
+          <button disabled={addTodo.isLoading} className="btn btn-primary">
+            {addTodo.isLoading ? "Adding..." : "Add"}
+          </button>
         </div>
       </form>
     </>
