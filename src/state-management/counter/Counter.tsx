@@ -4,8 +4,6 @@ const Counter = () => {
   // const [value, setValue] = useState(0);
   // const [value, dispatch] = useReducer(counterReducer, 0);
 
-  // const { counter, increment, reset } = useCounterStore();
-
   const counter = useCounterStore((state) => state.counter);
   const increment = useCounterStore((state) => state.increment);
   const reset = useCounterStore((state) => state.reset);
